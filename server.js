@@ -32,9 +32,14 @@ app.get('/timer', (req, res) => {
 
 if (cluster.isMaster) {
     console.log('MASTER has been started!');
-    
-    cluster.fork();
-    cluster.fork(); // 2 workers
+    const NUM_WORKERS = os.cpus().length;
+    for (let i = 0; i < NUM_WORKERS; i++) {
+        cluster.fork();
+    }
+    /* 
+     this way we create the amount of WORKER processes equal 
+     to the number of CPU's logical cores available on the machine.
+     */
 } else {
     console.log('WORKER process started!');
     app.listen(3000);
