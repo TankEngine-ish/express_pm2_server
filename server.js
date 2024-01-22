@@ -21,8 +21,8 @@ The master and worker threads have different pid's.
 
 
 app.get('/timer', (req, res) => {
-  delay(9000);
-  res.send(`Wake UP!${process.pid}`);
+  delay(4000);
+  res.send(`Wake UP, mfer!${process.pid}`);
 });
 
 console.log('Running Server.js...');
